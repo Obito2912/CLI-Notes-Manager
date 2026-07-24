@@ -43,7 +43,9 @@ program
       if (notes && notes.length > 0) {
         console.log(`Notes with tag "${tag}":`);
         notes.forEach((note) => {
-          console.log(`- ${note.title} (ID: ${note.noteId})`);
+          console.log(
+            `- ${note.title} (ID: ${note.noteId} URL: ${note.url || "N/A"})`,
+          );
         });
       } else {
         console.log(`No notes found with tag "${tag}".`);
@@ -53,7 +55,9 @@ program
       if (notes && notes.length > 0) {
         console.log("All notes:");
         notes.forEach((note) => {
-          console.log(`- ${note.title} (ID: ${note.noteId})`);
+          console.log(
+            `- ${note.title} (ID: ${note.noteId} URL: ${note.url || "N/A"})`,
+          );
         });
       } else {
         console.log("No notes found.");

@@ -63,14 +63,14 @@ export async function getNotesByTag(tag: string) {
 export async function updateNote(noteId: string, updatedFields: Partial<Note>) {
   const updateExpressions: string[] = [];
   const expressionAttributeValues: Record<string, any> = {};
-
+  // Build the update expression and attribute values based on the provided updatedFields
   for (const key in updatedFields) {
     updateExpressions.push(`${key} = :${key}`);
     expressionAttributeValues[`:${key}`] = (updatedFields as any)[key];
   }
-
+  // If there are no fields to update, return early
   if (updateExpressions.length === 0) return;
-
+  // Send the update command to DynamoDB
   await documentClient.send(
     new UpdateCommand({
       TableName: process.env.TABLE_NAME || "Notes",
@@ -80,5 +80,3 @@ export async function updateNote(noteId: string, updatedFields: Partial<Note>) {
     }),
   );
 }
-
-await updateNote("1", { title: "Updated Sample Note" });
